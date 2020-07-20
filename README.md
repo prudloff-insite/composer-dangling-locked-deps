@@ -12,7 +12,7 @@ will not be correctly removed from `composer.lock` and will continue to be insta
 ## Install
 
 ```shell script
-composer require insite/composer-dangling-locked-deps
+composer require insite/composer-dangling-locked-deps --dev
 ```
 
 ## Usage
