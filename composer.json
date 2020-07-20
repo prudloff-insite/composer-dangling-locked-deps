@@ -1,0 +1,26 @@
+{
+    "name": "insite/composer-dangling-locked-deps",
+    "description": "Detect dangling Composer locked dependencies",
+    "license": "GPL-2.0-or-later",
+    "type": "composer-plugin",
+    "require": {
+        "composer-plugin-api": "^1.1|^2.0",
+        "ocramius/package-versions": "^1.4"
+    },
+    "extra": {
+        "class": "ComposerDanglingLockedDeps\\DanglingLockedDepsPlugin"
+    },
+    "autoload": {
+        "psr-4": {
+            "ComposerDanglingLockedDeps\\": "src/"
+        }
+    },
+    "require-dev": {
+        "composer/composer": "^1.10"
+    },
+    "config": {
+        "platform": {
+            "php": "7.1.3"
+        }
+    }
+}
