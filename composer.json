@@ -12,11 +12,13 @@
     },
     "autoload": {
         "psr-4": {
-            "ComposerDanglingLockedDeps\\": "src/"
+            "ComposerDanglingLockedDeps\\": "src/",
+            "ComposerDanglingLockedDeps\\GrumPHP\\": "src/grumphp/"
         }
     },
     "require-dev": {
-        "composer/composer": "^1.10"
+        "composer/composer": "^1.10",
+        "phpro/grumphp": "^0.16.2"
     },
     "config": {
         "platform": {

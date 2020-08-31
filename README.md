@@ -22,3 +22,18 @@ composer dangling-locked-deps
 ```
 
 You can then call `composer remove` on those dependencies.
+
+## GrumPHP task
+
+This package also provides a [GrumPHP](https://github.com/phpro/grumphp) task.
+
+You can add it to your config like this:
+
+```yaml
+---
+parameters:
+  extensions:
+    - ComposerDanglingLockedDeps\GrumPHP\Loader
+  tasks:
+    composer_dangling_locked_deps: ~
+```
