@@ -17,7 +17,7 @@ class Loader implements ExtensionInterface
   /**
    * @param ContainerBuilder $container
    */
-  public function load(ContainerBuilder $container)
+  public function load(ContainerBuilder $container): void
   {
     $container->register('task.composer_dangling_locked_deps', ComposerDanglingLockedDeps::class)
       ->addArgument(new Reference('config'))

@@ -18,11 +18,11 @@
     },
     "require-dev": {
         "composer/composer": "^1.10",
-        "phpro/grumphp": "^0.16.2"
+        "phpro/grumphp": "^0.21.0"
     },
     "config": {
         "platform": {
-            "php": "7.1.3"
+            "php": "7.3.11"
         }
     }
 }
