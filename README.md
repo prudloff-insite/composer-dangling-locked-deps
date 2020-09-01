@@ -31,9 +31,14 @@ You can add it to your config like this:
 
 ```yaml
 ---
+services:
+  ComposerDanglingLockedDeps\GrumPHP\ComposerDanglingLockedDeps:
+    arguments:
+      - '@process_builder'
+      - '@formatter.raw_process'
+    tags:
+      - {name: grumphp.task, task: composer_dangling_locked_deps}
 parameters:
-  extensions:
-    - ComposerDanglingLockedDeps\GrumPHP\Loader
   tasks:
     composer_dangling_locked_deps: ~
 ```
