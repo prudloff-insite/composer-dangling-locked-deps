@@ -20,9 +20,8 @@ class Loader implements ExtensionInterface
   public function load(ContainerBuilder $container): void
   {
     $container->register('task.composer_dangling_locked_deps', ComposerDanglingLockedDeps::class)
-      ->addArgument(new Reference('config'))
       ->addArgument(new Reference('process_builder'))
       ->addArgument(new Reference('formatter.raw_process'))
-      ->addTag('grumphp.task', ['config' => 'composer_dangling_locked_deps']);
+      ->addTag('grumphp.task', ['task' => 'composer_dangling_locked_deps']);
   }
 }
