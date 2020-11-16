@@ -5,6 +5,8 @@ namespace ComposerDanglingLockedDeps;
 use Composer\Command\BaseCommand;
 use Composer\Repository\ArrayRepository;
 use Composer\Repository\CompositeRepository;
+use Composer\Repository\InstalledRepository;
+use Composer\Repository\LockArrayRepository;
 use PackageVersions\Versions;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -32,10 +34,24 @@ class DanglingLockedDepsCommand extends BaseCommand {
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
     $composer = $this->getComposer();
-    $repository = new CompositeRepository([
-      new ArrayRepository([$composer->getPackage()]),
-      $composer->getRepositoryManager()->getLocalRepository(),
-    ]);
+    $rootPackage = $composer->getPackage();
+    $localRepository = $composer->getRepositoryManager()->getLocalRepository();
+
+    if (class_exists(InstalledRepository::class)) {
+      // Composer 2
+      $repository = new InstalledRepository([
+        new LockArrayRepository([$rootPackage]),
+        $localRepository,
+      ]);
+    }
+    else {
+      // Composer 1
+      $repository = new CompositeRepository([
+        new ArrayRepository([$rootPackage]),
+        $localRepository,
+      ]);
+    }
+
     $io = $this->getIO();
 
     $exitCode = 0;
