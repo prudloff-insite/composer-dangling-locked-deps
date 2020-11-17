@@ -2,7 +2,7 @@
 
 This Composer plugin allows you to detect dangling locked dependencies.
 
-That is dependencies that are present in your `composer.lock` files
+That is dependencies that are present in your `composer.lock` file
 but are not actually required by your project or one of its dependencies.
 
 This can happen, for example, when merging changes to `composer.lock` with conflicts;
