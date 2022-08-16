@@ -3,6 +3,7 @@
 namespace ComposerDanglingLockedDeps;
 
 use Composer\Command\BaseCommand;
+use Composer\InstalledVersions;
 use Composer\Repository\ArrayRepository;
 use Composer\Repository\CompositeRepository;
 use Composer\Repository\InstalledRepository;
@@ -31,6 +32,7 @@ class DanglingLockedDepsCommand extends BaseCommand {
    * @param \Symfony\Component\Console\Output\OutputInterface $output
    *
    * @return int
+   * @todo Ignore virtual packages
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
     $composer = $this->getComposer();
@@ -56,8 +58,8 @@ class DanglingLockedDepsCommand extends BaseCommand {
 
     $exitCode = 0;
 
-    foreach (Versions::VERSIONS as $package => $version) {
-      if ($package != Versions::ROOT_PACKAGE_NAME) {
+    foreach (InstalledVersions::getInstalledPackages() as $package) {
+      if ($package != $rootPackage->getName()) {
         $results = $repository->getDependents($package, NULL, FALSE, FALSE);
         if (empty($results)) {
           $io->error($package . ' is a dangling dependency.');
