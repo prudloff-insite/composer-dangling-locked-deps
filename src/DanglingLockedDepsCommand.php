@@ -38,20 +38,10 @@ class DanglingLockedDepsCommand extends BaseCommand {
     $rootPackage = $composer->getPackage();
     $localRepository = $composer->getRepositoryManager()->getLocalRepository();
 
-    if (class_exists(InstalledRepository::class)) {
-      // Composer 2
-      $repository = new InstalledRepository([
-        new LockArrayRepository([$rootPackage]),
-        $localRepository,
-      ]);
-    }
-    else {
-      // Composer 1
-      $repository = new CompositeRepository([
-        new ArrayRepository([$rootPackage]),
-        $localRepository,
-      ]);
-    }
+    $repository = new InstalledRepository([
+      new LockArrayRepository([$rootPackage]),
+      $localRepository,
+    ]);
 
     $io = $this->getIO();
 
