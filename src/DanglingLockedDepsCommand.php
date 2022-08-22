@@ -59,11 +59,14 @@ class DanglingLockedDepsCommand extends BaseCommand {
 
     foreach (InstalledVersions::getInstalledPackages() as $package) {
       if ($package != $rootPackage->getName()) {
-        $results = $repository->getDependents($package, NULL, FALSE, FALSE);
-        if (empty($results)) {
-          $io->error($package . ' is a dangling dependency.');
+        // This filters out virtual packages.
+        if ($repository->findPackage($package, '*')) {
+          $results = $repository->getDependents($package, NULL, FALSE, FALSE);
+          if (empty($results)) {
+            $io->error($package . ' is a dangling dependency.');
 
-          $exitCode = 1;
+            $exitCode = 1;
+          }
         }
       }
     }
