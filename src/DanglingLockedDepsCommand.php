@@ -8,7 +8,6 @@ use Composer\Repository\ArrayRepository;
 use Composer\Repository\CompositeRepository;
 use Composer\Repository\InstalledRepository;
 use Composer\Repository\LockArrayRepository;
-use PackageVersions\Versions;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
