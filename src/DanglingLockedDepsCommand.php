@@ -8,6 +8,8 @@ use Composer\Repository\ArrayRepository;
 use Composer\Repository\CompositeRepository;
 use Composer\Repository\InstalledRepository;
 use Composer\Repository\LockArrayRepository;
+use Composer\Script\Event;
+use Composer\Script\ScriptEvents;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -37,13 +39,18 @@ class DanglingLockedDepsCommand extends BaseCommand {
     $composer = $this->getComposer();
     $rootPackage = $composer->getPackage();
     $localRepository = $composer->getRepositoryManager()->getLocalRepository();
+    $io = $this->getIO();
+
+    // This tells composer-merge-plugin that we want merged dev dependencies.
+    $event = new Event(ScriptEvents::PRE_AUTOLOAD_DUMP, $composer, $io, true);
+    $this->getComposer()
+      ->getEventDispatcher()
+      ->dispatch($event->getName(), $event);
 
     $repository = new InstalledRepository([
       new LockArrayRepository([$rootPackage]),
       $localRepository,
     ]);
-
-    $io = $this->getIO();
 
     $exitCode = 0;
 
