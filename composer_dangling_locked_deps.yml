@@ -1,0 +1,6 @@
+services:
+  composer_dangling_locked_deps:
+    class: ComposerDanglingLockedDeps\GrumPHP\ComposerDanglingLockedDeps
+    arguments: [ '@process_builder', '@formatter.raw_process' ]
+    tags:
+      - { name: grumphp.task, task: composer_dangling_locked_deps }

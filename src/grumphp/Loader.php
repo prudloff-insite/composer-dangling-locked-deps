@@ -3,8 +3,6 @@
 namespace ComposerDanglingLockedDeps\GrumPHP;
 
 use GrumPHP\Extension\ExtensionInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class Loader
@@ -14,14 +12,9 @@ use Symfony\Component\DependencyInjection\Reference;
 class Loader implements ExtensionInterface
 {
 
-  /**
-   * @param ContainerBuilder $container
-   */
-  public function load(ContainerBuilder $container): void
-  {
-    $container->register('task.composer_dangling_locked_deps', ComposerDanglingLockedDeps::class)
-      ->addArgument(new Reference('process_builder'))
-      ->addArgument(new Reference('formatter.raw_process'))
-      ->addTag('grumphp.task', ['task' => 'composer_dangling_locked_deps']);
+  public function imports(): iterable {
+    return [
+      __DIR__ . '/../../composer_dangling_locked_deps.yml',
+    ];
   }
 }

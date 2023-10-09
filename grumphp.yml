@@ -1,0 +1,6 @@
+---
+grumphp:
+  extensions:
+    - ComposerDanglingLockedDeps\GrumPHP\Loader
+  tasks:
+    composer_dangling_locked_deps: ~
