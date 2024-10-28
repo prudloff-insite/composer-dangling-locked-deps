@@ -35,7 +35,7 @@ class DanglingLockedDepsCommand extends BaseCommand {
    * @return int
    * @todo Ignore virtual packages
    */
-  protected function execute(InputInterface $input, OutputInterface $output) {
+  protected function execute(InputInterface $input, OutputInterface $output): int {
     $composer = $this->getComposer();
     $rootPackage = $composer->getPackage();
     $localRepository = $composer->getRepositoryManager()->getLocalRepository();
