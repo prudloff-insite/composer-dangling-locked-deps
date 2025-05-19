@@ -68,6 +68,10 @@ class DanglingLockedDepsCommand extends BaseCommand {
       }
     }
 
+    if ($exitCode > 0) {
+      $io->warning('Try running "composer remove --unused".');
+    }
+
     return $exitCode;
   }
 }
